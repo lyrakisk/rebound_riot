@@ -1,26 +1,14 @@
 use bevy::prelude::*;
 
+mod components;
+mod systems;
+
+use systems::*;
+
 fn main() {
     App::new()
         .add_plugins(DefaultPlugins)
-        .add_systems(Startup, (spawn_ball, spawn_camera))
+        .add_systems(Startup, spawn_entities)
+        .add_systems(FixedUpdate, project_positions)
         .run();
 }
-
-fn spawn_ball(mut commands: Commands) {
-    println!("Spawning ball...");
-    commands.spawn(Ball);
-}
-
-fn spawn_camera(mut commands: Commands) {
-    println!("Spawning camera...");
-    commands.spawn(Camera2d);
-}
-
-#[derive(Component, Default)]
-#[require(Transform)]
-struct Position(Vec2);
-
-#[derive(Component)]
-#[require(Position)]
-struct Ball;
