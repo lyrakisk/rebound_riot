@@ -4,7 +4,10 @@ pub mod position;
 
 use ball::*;
 
-pub const SPAWN_COMPONENTS: (fn(Commands), fn(Commands)) = (spawn_ball, spawn_camera);
+pub const SPAWN_COMPONENTS: (
+    fn(Commands, ResMut<Assets<Mesh>>, ResMut<Assets<ColorMaterial>>),
+    fn(Commands),
+) = (spawn_ball, spawn_camera);
 
 fn spawn_camera(mut commands: Commands) {
     commands.spawn(Camera2d);
