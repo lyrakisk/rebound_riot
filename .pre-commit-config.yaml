@@ -1,0 +1,13 @@
+# .pre-commit-config.yaml
+# Pre‑commit configuration for a Rust project.
+# This will abort the commit if any file fails the `cargo fmt --check` test.
+
+repos:
+  - repo: local
+    # Give the hook a descriptive name
+    hooks:
+      - id: rustfmt
+        name: rustfmt (cargo fmt --check)
+        entry: cargo fmt -- --check
+        language: system          # Uses the system’s Cargo installation
+        types: [rust]             # Limits the hook to *.rs files
