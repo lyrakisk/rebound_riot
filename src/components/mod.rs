@@ -2,6 +2,7 @@ use bevy::prelude::*;
 pub mod ball;
 pub mod collider;
 pub mod paddle;
+pub mod players;
 pub mod position;
 pub mod velocity;
 
@@ -12,7 +13,7 @@ pub const SPAWN_COMPONENTS: (
     fn(Commands, ResMut<Assets<Mesh>>, ResMut<Assets<ColorMaterial>>),
     fn(Commands, ResMut<Assets<Mesh>>, ResMut<Assets<ColorMaterial>>),
     fn(Commands),
-) = (spawn_ball, spawn_paddle, spawn_camera);
+) = (spawn_ball, spawn_paddles, spawn_camera);
 
 fn spawn_camera(mut commands: Commands) {
     commands.spawn(Camera2d);

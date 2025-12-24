@@ -3,6 +3,7 @@ mod systems;
 
 use bevy::prelude::*;
 use components::ball::*;
+use components::paddle::*;
 use components::*;
 use systems::*;
 
@@ -13,7 +14,9 @@ fn main() {
         .add_systems(
             FixedUpdate,
             (
+                handle_player_input.before(move_paddles),
                 move_ball.before(project_positions),
+                move_paddles.before(project_positions),
                 project_positions,
                 handle_collisions.after(move_ball),
             ),
