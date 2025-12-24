@@ -1,10 +1,12 @@
 mod components;
+mod events;
 mod systems;
 
 use bevy::prelude::*;
 use components::ball::*;
 use components::paddle::*;
 use components::*;
+use events::handlers::reset_ball;
 use systems::*;
 
 fn main() {
@@ -20,7 +22,9 @@ fn main() {
                 project_positions,
                 handle_collisions.after(move_ball),
                 constrain_paddle_position.after(move_paddles),
+                detect_goal.after(move_ball),
             ),
         )
+        .add_observer(reset_ball)
         .run();
 }

@@ -26,7 +26,7 @@ pub fn spawn_paddles(
         Paddle,
         Mesh2d(mesh.clone()),
         MeshMaterial2d(material.clone()),
-        Position(Vec2::new(350., 0.)),
+        Position(Vec2::new(-350., 0.)),
         Player,
     ));
 
@@ -34,7 +34,8 @@ pub fn spawn_paddles(
         Paddle,
         Mesh2d(mesh),
         MeshMaterial2d(material),
-        Position(Vec2::new(-350., 0.)),
+        Position(Vec2::new(350., 0.)),
+        Ai,
     ));
 }
 
