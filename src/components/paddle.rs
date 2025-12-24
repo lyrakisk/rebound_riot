@@ -5,11 +5,13 @@ use super::position::*;
 use super::velocity::*;
 use bevy::math::bounding::Aabb2d;
 use bevy::prelude::*;
+
 const PADDLE_WIDTH: f32 = 10.0;
 const PADDLE_HEIGHT: f32 = 100.0;
 const PADDLE_SHAPE: Rectangle = Rectangle::new(PADDLE_WIDTH, PADDLE_HEIGHT);
 const PADDLE_COLOR: Color = Color::srgb(0., 1., 0.);
 const PADDLE_SPEED: f32 = 5.;
+const PADDLE_POSITION_PADDING: f32 = 20.;
 
 #[derive(Component)]
 #[require(Position, Velocity, Collider = Collider(PADDLE_SHAPE))]
@@ -19,22 +21,27 @@ pub fn spawn_paddles(
     mut commands: Commands,
     mut meshes: ResMut<Assets<Mesh>>,
     mut materials: ResMut<Assets<ColorMaterial>>,
+    window: Single<&Window>,
 ) {
     let mesh = meshes.add(PADDLE_SHAPE);
     let material = materials.add(PADDLE_COLOR);
+    let half_window_size = window.resolution.size() / 2.;
+
+    let player_position = Vec2::new(-half_window_size.x + PADDLE_POSITION_PADDING, 0.);
     commands.spawn((
         Paddle,
         Mesh2d(mesh.clone()),
         MeshMaterial2d(material.clone()),
-        Position(Vec2::new(-350., 0.)),
+        Position(player_position),
         Player,
     ));
 
+    let ai_position = Vec2::new(half_window_size.x - PADDLE_POSITION_PADDING, 0.);
     commands.spawn((
         Paddle,
         Mesh2d(mesh),
         MeshMaterial2d(material),
-        Position(Vec2::new(350., 0.)),
+        Position(ai_position),
         Ai,
     ));
 }

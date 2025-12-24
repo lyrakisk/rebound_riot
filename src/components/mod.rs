@@ -13,7 +13,7 @@ use paddle::*;
 
 pub const SPAWN_COMPONENTS: (
     fn(Commands, ResMut<Assets<Mesh>>, ResMut<Assets<ColorMaterial>>),
-    fn(Commands, ResMut<Assets<Mesh>>, ResMut<Assets<ColorMaterial>>),
+    fn(Commands, ResMut<Assets<Mesh>>, ResMut<Assets<ColorMaterial>>, Single<&Window>),
     fn(Commands, ResMut<Assets<Mesh>>, ResMut<Assets<ColorMaterial>>, Single<&Window>),
     fn(Commands),
 ) = (spawn_ball, spawn_paddles, spawn_gutters, spawn_camera);
