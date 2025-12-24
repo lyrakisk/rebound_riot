@@ -2,6 +2,7 @@ use bevy::prelude::*;
 pub mod ball;
 pub mod paddle;
 pub mod position;
+pub mod velocity;
 
 use ball::*;
 use paddle::*;

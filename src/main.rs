@@ -2,6 +2,7 @@ mod components;
 mod systems;
 
 use bevy::prelude::*;
+use components::ball::*;
 use components::*;
 use systems::*;
 
