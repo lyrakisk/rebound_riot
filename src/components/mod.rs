@@ -1,5 +1,6 @@
 use bevy::prelude::*;
 pub mod ball;
+pub mod collider;
 pub mod paddle;
 pub mod position;
 pub mod velocity;

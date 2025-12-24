@@ -1,3 +1,4 @@
+use super::collider::*;
 use super::position::*;
 use bevy::prelude::*;
 
@@ -7,7 +8,7 @@ const PADDLE_SHAPE: Rectangle = Rectangle::new(PADDLE_WIDTH, PADDLE_HEIGHT);
 const PADDLE_COLOR: Color = Color::srgb(0., 1., 0.);
 
 #[derive(Component)]
-#[require(Position)]
+#[require(Position,   Collider = Collider(PADDLE_SHAPE))]
 pub struct Paddle;
 
 pub fn spawn_paddle(

@@ -12,7 +12,11 @@ fn main() {
         .add_systems(Startup, SPAWN_COMPONENTS)
         .add_systems(
             FixedUpdate,
-            (move_ball.before(project_positions), project_positions),
+            (
+                move_ball.before(project_positions),
+                project_positions,
+                handle_collisions.after(move_ball),
+            ),
         )
         .run();
 }
