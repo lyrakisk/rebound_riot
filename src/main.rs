@@ -19,6 +19,7 @@ fn main() {
                 handle_player_input.before(move_paddles),
                 move_ball.before(project_positions),
                 move_paddles.before(project_positions),
+                move_ai.before(project_positions),
                 project_positions,
                 handle_collisions.after(move_ball),
                 constrain_paddle_position.after(move_paddles),

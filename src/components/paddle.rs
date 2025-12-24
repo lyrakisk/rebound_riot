@@ -10,7 +10,7 @@ const PADDLE_WIDTH: f32 = 10.0;
 const PADDLE_HEIGHT: f32 = 100.0;
 const PADDLE_SHAPE: Rectangle = Rectangle::new(PADDLE_WIDTH, PADDLE_HEIGHT);
 const PADDLE_COLOR: Color = Color::srgb(0., 1., 0.);
-const PADDLE_SPEED: f32 = 5.;
+pub const PADDLE_SPEED: f32 = 5.;
 const PADDLE_POSITION_PADDING: f32 = 20.;
 
 #[derive(Component)]
