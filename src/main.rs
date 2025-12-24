@@ -3,6 +3,7 @@ mod events;
 mod systems;
 
 use bevy::prelude::*;
+use bevy::window::WindowMode;
 use components::ball::*;
 use components::paddle::*;
 use components::*;
@@ -11,7 +12,17 @@ use systems::*;
 
 fn main() {
     App::new()
-        .add_plugins(DefaultPlugins)
+        .add_plugins(DefaultPlugins.set(WindowPlugin {
+            primary_window: Some(Window {
+                title: "Rebound Riot".to_string(),
+                mode: WindowMode::Fullscreen(
+                    MonitorSelection::Primary,
+                    VideoModeSelection::Current,
+                ),
+                ..default()
+            }),
+            ..default()
+        }))
         .add_systems(Startup, SPAWN_COMPONENTS)
         .add_systems(
             FixedUpdate,
