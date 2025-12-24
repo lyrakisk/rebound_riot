@@ -24,7 +24,7 @@ pub fn spawn_ball(
         Ball,
         Mesh2d(mesh),
         MeshMaterial2d(material),
-        Velocity(Vec2::new(BALL_SPEED, 0.)),
+        Velocity(Vec2::new(BALL_SPEED, BALL_SPEED)),
     ));
 }
 
