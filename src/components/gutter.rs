@@ -4,7 +4,7 @@ use bevy::prelude::*;
 
 #[derive(Component)]
 #[require(Position, Collider)]
-struct Gutter;
+pub struct Gutter;
 
 const GUTTER_COLOR: Color = Color::srgb(0., 0., 1.);
 const GUTTER_HEIGHT: f32 = 20.;

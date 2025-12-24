@@ -1,9 +1,10 @@
 use super::collider::*;
+use super::gutter::Gutter;
 use super::players::*;
 use super::position::*;
 use super::velocity::*;
+use bevy::math::bounding::Aabb2d;
 use bevy::prelude::*;
-
 const PADDLE_WIDTH: f32 = 10.0;
 const PADDLE_HEIGHT: f32 = 100.0;
 const PADDLE_SHAPE: Rectangle = Rectangle::new(PADDLE_WIDTH, PADDLE_HEIGHT);
@@ -53,5 +54,33 @@ pub fn handle_player_input(
 pub fn move_paddles(mut paddles: Query<(&mut Position, &Velocity), With<Paddle>>) {
     for (mut position, velocity) in &mut paddles {
         position.0 += velocity.0;
+    }
+}
+
+pub fn constrain_paddle_position(
+    mut paddles: Query<(&mut Position, &Collider), (With<Paddle>, Without<Gutter>)>,
+    gutters: Query<(&Position, &Collider), (With<Gutter>, Without<Paddle>)>,
+) {
+    for (mut paddle_position, paddle_collider) in &mut paddles {
+        for (gutter_position, gutter_collider) in &gutters {
+            let paddle_aabb = Aabb2d::new(paddle_position.0, paddle_collider.half_size());
+            let gutter_aabb = Aabb2d::new(gutter_position.0, gutter_collider.half_size());
+
+            if let Some(collision) = collide_with_side(paddle_aabb, gutter_aabb) {
+                match collision {
+                    Collision::Top => {
+                        paddle_position.0.y = gutter_position.0.y
+                            + gutter_collider.half_size().y
+                            + paddle_collider.half_size().y;
+                    }
+                    Collision::Bottom => {
+                        paddle_position.0.y = gutter_position.0.y
+                            - gutter_collider.half_size().y
+                            - paddle_collider.half_size().y;
+                    }
+                    _ => {}
+                }
+            }
+        }
     }
 }

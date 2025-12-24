@@ -41,8 +41,8 @@ pub fn handle_collisions(
 
     for (other_position, other_collider) in &other_things {
         if let Some(collision) = collide_with_side(
-            Aabb2d::new(ball_position.0, ball_collider.0.half_size),
-            Aabb2d::new(other_position.0, other_collider.0.half_size),
+            Aabb2d::new(ball_position.0, ball_collider.half_size()),
+            Aabb2d::new(other_position.0, other_collider.half_size()),
         ) {
             match collision {
                 Collision::Left => {

@@ -13,6 +13,11 @@ pub enum Collision {
 #[derive(Component, Default)]
 pub struct Collider(pub Rectangle);
 
+impl Collider {
+    pub fn half_size(&self) -> Vec2 {
+        return self.0.half_size;
+    }
+}
 pub fn collide_with_side(ball: Aabb2d, wall: Aabb2d) -> Option<Collision> {
     if !ball.intersects(&wall) {
         return None;

@@ -19,6 +19,7 @@ fn main() {
                 move_paddles.before(project_positions),
                 project_positions,
                 handle_collisions.after(move_ball),
+                constrain_paddle_position.after(move_paddles),
             ),
         )
         .run();
