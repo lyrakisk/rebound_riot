@@ -7,7 +7,7 @@ const BALL_COLOR: Color = Color::srgb(1., 0., 0.);
 
 #[derive(Component)]
 #[require(Position)]
-struct Ball;
+pub struct Ball;
 
 pub fn spawn_ball(
     mut commands: Commands,
